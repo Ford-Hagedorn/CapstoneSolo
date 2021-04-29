@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HowdyFresh.Models;
 
 namespace HowdyFresh.Data
 {
@@ -30,5 +31,7 @@ namespace HowdyFresh.Data
                 }
                 );
         }
+        public DbSet<HowdyFresh.Models.Supplier> Supplier { get; set; }
+        public DbSet<HowdyFresh.Models.Restaurant> Restaurant { get; set; }
     }
 }
