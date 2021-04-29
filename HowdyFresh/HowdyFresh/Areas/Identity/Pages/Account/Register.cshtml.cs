@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -115,6 +116,7 @@ namespace HowdyFresh.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 }
                 foreach (var error in result.Errors)
                 {
