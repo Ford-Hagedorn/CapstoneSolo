@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowdyFresh.Data;
 using HowdyFresh.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HowdyFresh.Controllers
 {
+    [Authorize(Roles = "Supplier")]
     public class SuppliersController : Controller
     {
         private readonly ApplicationDbContext _context;
