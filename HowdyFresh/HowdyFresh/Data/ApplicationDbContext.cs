@@ -33,5 +33,6 @@ namespace HowdyFresh.Data
         }
         public DbSet<HowdyFresh.Models.Supplier> Supplier { get; set; }
         public DbSet<HowdyFresh.Models.Restaurant> Restaurant { get; set; }
+        public DbSet<HowdyFresh.Models.Roles> Roles { get; set; }
     }
 }
