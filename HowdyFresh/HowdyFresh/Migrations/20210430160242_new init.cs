@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
-namespace HowdyFresh.Data.Migrations
+namespace HowdyFresh.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class newinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,11 +47,25 @@ namespace HowdyFresh.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Restaurant = table.Column<string>(nullable: true),
+                    Supplier = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -73,7 +86,7 @@ namespace HowdyFresh.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -93,8 +106,8 @@ namespace HowdyFresh.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +151,8 @@ namespace HowdyFresh.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -152,6 +165,63 @@ namespace HowdyFresh.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Restaurant",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Rating = table.Column<int>(nullable: false),
+                    IdentityUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Restaurant", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Restaurant_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Supplier",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Products = table.Column<string>(nullable: true),
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductStock = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: false),
+                    IdentityUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplier", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Supplier_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "f23ca3a2-67f1-4bca-aa39-360c028b36c7", "a9c7173e-9b35-416e-aa67-eebee53a3f66", "Restaurant", "RESTAURANT" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "3919e6c4-3a72-4e5a-b478-bbb3dbf8e70a", "f31f7594-7d8e-47e2-8572-d48b8b5091d0", "Supplier", "SUPPLIER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -191,6 +261,16 @@ namespace HowdyFresh.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Restaurant_IdentityUserId",
+                table: "Restaurant",
+                column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Supplier_IdentityUserId",
+                table: "Supplier",
+                column: "IdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,6 +289,15 @@ namespace HowdyFresh.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Restaurant");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Supplier");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HowdyFresh.Data.Migrations
+namespace HowdyFresh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -18,6 +18,85 @@ namespace HowdyFresh.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HowdyFresh.Models.Restaurant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Restaurant");
+                });
+
+            modelBuilder.Entity("HowdyFresh.Models.Roles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Restaurant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductStock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Products")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Supplier");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -48,15 +127,15 @@ namespace HowdyFresh.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ceea76c9-60a0-417e-af8d-7ef16c3db05b",
-                            ConcurrencyStamp = "85e628ae-1e59-4105-bd00-fc7026c87b78",
+                            Id = "f23ca3a2-67f1-4bca-aa39-360c028b36c7",
+                            ConcurrencyStamp = "a9c7173e-9b35-416e-aa67-eebee53a3f66",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "f08c8447-9e4b-48ce-848c-6924a67a5944",
-                            ConcurrencyStamp = "01198d90-6baf-4896-90b5-394386a65b29",
+                            Id = "3919e6c4-3a72-4e5a-b478-bbb3dbf8e70a",
+                            ConcurrencyStamp = "f31f7594-7d8e-47e2-8572-d48b8b5091d0",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });
@@ -229,6 +308,20 @@ namespace HowdyFresh.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HowdyFresh.Models.Restaurant", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+                });
+
+            modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
