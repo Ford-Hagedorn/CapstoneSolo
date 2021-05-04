@@ -45,6 +45,7 @@ namespace HowdyFresh
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddControllers().AddNewtonsoftJson(n => n.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

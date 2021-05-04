@@ -28,7 +28,7 @@ namespace server.Controllers
 
     {
 
-        public static void Main(string[] args)
+        public static void PaymentMain(string[] args)
 
         {
 
