@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowdyFresh.Data;
 using HowdyFresh.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HowdyFresh.Controllers
 {
-    [Authorize(Roles = "Restaurant")]
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,7 +57,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Rating,IdentityUserId")] Restaurant restaurant)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Rating,IdentityUserId")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +91,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Rating,IdentityUserId")] Restaurant restaurant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Rating,IdentityUserId")] Restaurant restaurant)
         {
             if (id != restaurant.Id)
             {
