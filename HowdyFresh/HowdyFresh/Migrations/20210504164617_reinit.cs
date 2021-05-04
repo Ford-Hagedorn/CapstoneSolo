@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HowdyFresh.Migrations
 {
-    public partial class newinit : Migration
+    public partial class reinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -174,6 +174,8 @@ namespace HowdyFresh.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
@@ -196,6 +198,8 @@ namespace HowdyFresh.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
                     Products = table.Column<string>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
                     ProductStock = table.Column<int>(nullable: false),
@@ -216,12 +220,12 @@ namespace HowdyFresh.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f23ca3a2-67f1-4bca-aa39-360c028b36c7", "a9c7173e-9b35-416e-aa67-eebee53a3f66", "Restaurant", "RESTAURANT" });
+                values: new object[] { "55c680f8-26f5-48d7-9df3-b4fc200ebf43", "3ff96cf8-8699-4c3b-a2b0-396cbec88817", "Restaurant", "RESTAURANT" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3919e6c4-3a72-4e5a-b478-bbb3dbf8e70a", "f31f7594-7d8e-47e2-8572-d48b8b5091d0", "Supplier", "SUPPLIER" });
+                values: new object[] { "610f2a90-e82e-4b7b-b818-7a15027222c1", "b8096b54-f163-4e65-8013-bb96456818c8", "Supplier", "SUPPLIER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

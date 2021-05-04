@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HowdyFresh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210430160242_new init")]
-    partial class newinit
+    [Migration("20210504164617_reinit")]
+    partial class reinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -39,6 +42,9 @@ namespace HowdyFresh.Migrations
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -75,6 +81,9 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -92,6 +101,9 @@ namespace HowdyFresh.Migrations
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -129,15 +141,15 @@ namespace HowdyFresh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f23ca3a2-67f1-4bca-aa39-360c028b36c7",
-                            ConcurrencyStamp = "a9c7173e-9b35-416e-aa67-eebee53a3f66",
+                            Id = "55c680f8-26f5-48d7-9df3-b4fc200ebf43",
+                            ConcurrencyStamp = "3ff96cf8-8699-4c3b-a2b0-396cbec88817",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "3919e6c4-3a72-4e5a-b478-bbb3dbf8e70a",
-                            ConcurrencyStamp = "f31f7594-7d8e-47e2-8572-d48b8b5091d0",
+                            Id = "610f2a90-e82e-4b7b-b818-7a15027222c1",
+                            ConcurrencyStamp = "b8096b54-f163-4e65-8013-bb96456818c8",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });
