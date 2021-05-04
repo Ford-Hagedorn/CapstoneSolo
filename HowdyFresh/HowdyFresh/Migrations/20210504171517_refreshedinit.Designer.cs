@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HowdyFresh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210504164617_reinit")]
-    partial class reinit
+    [Migration("20210504171517_refreshedinit")]
+    partial class refreshedinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,15 +141,15 @@ namespace HowdyFresh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "55c680f8-26f5-48d7-9df3-b4fc200ebf43",
-                            ConcurrencyStamp = "3ff96cf8-8699-4c3b-a2b0-396cbec88817",
+                            Id = "8af897af-bc14-468b-a990-b4d17a4b9f7f",
+                            ConcurrencyStamp = "50ab0494-9d03-4de1-b358-eec01ec4a76c",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "610f2a90-e82e-4b7b-b818-7a15027222c1",
-                            ConcurrencyStamp = "b8096b54-f163-4e65-8013-bb96456818c8",
+                            Id = "7c90edc7-1ead-482c-a5ad-58a152360a0f",
+                            ConcurrencyStamp = "b6636693-8f82-4b45-bd1a-9332a1a28361",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });

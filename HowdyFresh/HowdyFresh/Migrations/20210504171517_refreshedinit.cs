@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HowdyFresh.Migrations
 {
-    public partial class reinit : Migration
+    public partial class refreshedinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -220,12 +220,12 @@ namespace HowdyFresh.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "55c680f8-26f5-48d7-9df3-b4fc200ebf43", "3ff96cf8-8699-4c3b-a2b0-396cbec88817", "Restaurant", "RESTAURANT" });
+                values: new object[] { "8af897af-bc14-468b-a990-b4d17a4b9f7f", "50ab0494-9d03-4de1-b358-eec01ec4a76c", "Restaurant", "RESTAURANT" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "610f2a90-e82e-4b7b-b818-7a15027222c1", "b8096b54-f163-4e65-8013-bb96456818c8", "Supplier", "SUPPLIER" });
+                values: new object[] { "7c90edc7-1ead-482c-a5ad-58a152360a0f", "b6636693-8f82-4b45-bd1a-9332a1a28361", "Supplier", "SUPPLIER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
