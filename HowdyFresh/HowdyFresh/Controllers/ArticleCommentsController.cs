@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowdyFresh.Data;
 using HowdyFresh.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HowdyFresh.Controllers
 {
@@ -53,6 +54,28 @@ namespace HowdyFresh.Controllers
         // POST: ArticleComments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Add(FormCollection form)
+        {
+            var comment = form["Comment"].ToString();
+            var articleId = int.Parse(form["ArticleId"]);
+            var rating = int.Parse(form["Rating"]);
+
+            ArticleComment artComment = new ArticleComment()
+            {
+                ArticleId = articleId,
+                Comment = comment,
+                Rating = rating,
+                ThisDateTime = DateTime.Now
+
+            };
+
+            _context.ArticleComment.Add(artComment);
+            _context.SaveChanges();
+            return RedirectToAction("Details", "Articles", new { id = articleId });
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CommentId,Comment,ThisDateTime,ArticleId,Rating")] ArticleComment articleComment)
