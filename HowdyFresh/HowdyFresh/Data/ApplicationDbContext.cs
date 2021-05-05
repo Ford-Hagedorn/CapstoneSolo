@@ -14,6 +14,11 @@ namespace HowdyFresh.Data
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -34,5 +39,7 @@ namespace HowdyFresh.Data
         public DbSet<HowdyFresh.Models.Supplier> Supplier { get; set; }
         public DbSet<HowdyFresh.Models.Restaurant> Restaurant { get; set; }
         public DbSet<HowdyFresh.Models.Roles> Roles { get; set; }
+        public DbSet<HowdyFresh.Models.Article> Article { get; set; }
+        public DbSet<HowdyFresh.Models.ArticleComment> ArticleComment { get; set; }
     }
 }
