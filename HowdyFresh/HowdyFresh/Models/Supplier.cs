@@ -19,10 +19,16 @@ namespace HowdyFresh.Models
         public string Products { get; set; }
         public int ProductId { get; set; }
         public int ProductStock { get; set; }
-        public int Rating { get; set; }
+        public string ContactEmail { get; set; }
+        public string PhoneNumber { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+
+        [ForeignKey("Article")]
+        public int Rating { get; set; }
+        public Article Article { get; set; }
+
     }
 }

@@ -77,10 +77,16 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Rating")
@@ -92,6 +98,8 @@ namespace HowdyFresh.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("Rating");
 
                     b.ToTable("Restaurant");
                 });
@@ -127,10 +135,16 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
@@ -151,6 +165,8 @@ namespace HowdyFresh.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("Rating");
 
                     b.ToTable("Supplier");
                 });
@@ -184,15 +200,15 @@ namespace HowdyFresh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dbb9066c-2c14-41a5-adb5-ade28a0489fd",
-                            ConcurrencyStamp = "ef1f569d-49e5-42c3-923c-d5f6562c6e6f",
+                            Id = "6ab11c4b-f0a4-4474-8a7f-c4e3cd3e1993",
+                            ConcurrencyStamp = "1424bcac-1ab0-49eb-be82-d3623fe201e3",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "a58a545f-59f1-4299-b1d1-187392771a18",
-                            ConcurrencyStamp = "4cfb69d2-1db9-4f70-b78d-4dcdf126a02d",
+                            Id = "5648fe1a-ee4f-424e-b11a-592a3d53107c",
+                            ConcurrencyStamp = "8188e121-b141-426a-8f6e-0ecc3a0a0268",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });
@@ -372,6 +388,12 @@ namespace HowdyFresh.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("HowdyFresh.Models.Article", "Article")
+                        .WithMany()
+                        .HasForeignKey("Rating")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
@@ -379,6 +401,12 @@ namespace HowdyFresh.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("HowdyFresh.Models.Article", "Article")
+                        .WithMany()
+                        .HasForeignKey("Rating")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

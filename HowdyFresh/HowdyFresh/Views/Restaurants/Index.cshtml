@@ -25,9 +25,14 @@
                 @Html.DisplayNameFor(model => model.State)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rating)
+                @Html.DisplayNameFor(model => model.ContactEmail)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,9 +52,14 @@
                 @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rating)
+                @Html.DisplayFor(modelItem => item.ContactEmail)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article.AutoId)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

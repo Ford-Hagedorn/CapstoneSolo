@@ -16,10 +16,16 @@ namespace HowdyFresh.Models
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int Rating { get; set; }
+        public string ContactEmail { get; set; }
+        public string PhoneNumber { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+
+        [ForeignKey("Article")]
+        public int Rating { get; set; }
+        public Article Article { get; set; }
+
     }
 }
