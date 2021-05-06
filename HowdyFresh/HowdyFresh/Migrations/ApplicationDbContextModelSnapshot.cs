@@ -19,6 +19,51 @@ namespace HowdyFresh.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HowdyFresh.Models.Article", b =>
+                {
+                    b.Property<int>("AutoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AutoId");
+
+                    b.ToTable("Article");
+                });
+
+            modelBuilder.Entity("HowdyFresh.Models.ArticleComment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ThisDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CommentId");
+
+                    b.ToTable("ArticleComment");
+                });
+
             modelBuilder.Entity("HowdyFresh.Models.Restaurant", b =>
                 {
                     b.Property<int>("Id")
@@ -139,15 +184,15 @@ namespace HowdyFresh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8af897af-bc14-468b-a990-b4d17a4b9f7f",
-                            ConcurrencyStamp = "50ab0494-9d03-4de1-b358-eec01ec4a76c",
+                            Id = "dbb9066c-2c14-41a5-adb5-ade28a0489fd",
+                            ConcurrencyStamp = "ef1f569d-49e5-42c3-923c-d5f6562c6e6f",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "7c90edc7-1ead-482c-a5ad-58a152360a0f",
-                            ConcurrencyStamp = "b6636693-8f82-4b45-bd1a-9332a1a28361",
+                            Id = "a58a545f-59f1-4299-b1d1-187392771a18",
+                            ConcurrencyStamp = "4cfb69d2-1db9-4f70-b78d-4dcdf126a02d",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });

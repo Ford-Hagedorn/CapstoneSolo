@@ -3,10 +3,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HowdyFresh.Migrations
 {
-    public partial class refreshedinit : Migration
+    public partial class init3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Article",
+                columns: table => new
+                {
+                    AutoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Supplier = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Article", x => x.AutoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArticleComment",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Comment = table.Column<string>(nullable: true),
+                    ThisDateTime = table.Column<DateTime>(nullable: true),
+                    ArticleId = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleComment", x => x.CommentId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -220,12 +251,12 @@ namespace HowdyFresh.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8af897af-bc14-468b-a990-b4d17a4b9f7f", "50ab0494-9d03-4de1-b358-eec01ec4a76c", "Restaurant", "RESTAURANT" });
+                values: new object[] { "dbb9066c-2c14-41a5-adb5-ade28a0489fd", "ef1f569d-49e5-42c3-923c-d5f6562c6e6f", "Restaurant", "RESTAURANT" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7c90edc7-1ead-482c-a5ad-58a152360a0f", "b6636693-8f82-4b45-bd1a-9332a1a28361", "Supplier", "SUPPLIER" });
+                values: new object[] { "a58a545f-59f1-4299-b1d1-187392771a18", "4cfb69d2-1db9-4f70-b78d-4dcdf126a02d", "Supplier", "SUPPLIER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -279,6 +310,12 @@ namespace HowdyFresh.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Article");
+
+            migrationBuilder.DropTable(
+                name: "ArticleComment");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
