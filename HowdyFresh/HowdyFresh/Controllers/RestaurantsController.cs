@@ -22,7 +22,7 @@ namespace HowdyFresh.Controllers
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Restaurant.Include(r => r.Article).Include(r => r.IdentityUser);
+            var applicationDbContext = _context.Restaurant.Include(r => r.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace HowdyFresh.Controllers
             }
 
             var restaurant = await _context.Restaurant
-                .Include(r => r.Article)
                 .Include(r => r.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (restaurant == null)
@@ -49,7 +48,6 @@ namespace HowdyFresh.Controllers
         // GET: Restaurants/Create
         public IActionResult Create()
         {
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -59,7 +57,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,ContactEmail,PhoneNumber,IdentityUserId,Rating")] Restaurant restaurant)
+        public async Task<IActionResult> Create([Bind("Id,Name,Cuisine,Address,City,State,ContactEmail,PhoneNumber,Rating,IdentityUserId")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace HowdyFresh.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", restaurant.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", restaurant.IdentityUserId);
             return View(restaurant);
         }
@@ -85,7 +82,6 @@ namespace HowdyFresh.Controllers
             {
                 return NotFound();
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", restaurant.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", restaurant.IdentityUserId);
             return View(restaurant);
         }
@@ -95,7 +91,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,ContactEmail,PhoneNumber,IdentityUserId,Rating")] Restaurant restaurant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Cuisine,Address,City,State,ContactEmail,PhoneNumber,Rating,IdentityUserId")] Restaurant restaurant)
         {
             if (id != restaurant.Id)
             {
@@ -122,7 +118,6 @@ namespace HowdyFresh.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", restaurant.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", restaurant.IdentityUserId);
             return View(restaurant);
         }
@@ -136,7 +131,6 @@ namespace HowdyFresh.Controllers
             }
 
             var restaurant = await _context.Restaurant
-                .Include(r => r.Article)
                 .Include(r => r.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (restaurant == null)

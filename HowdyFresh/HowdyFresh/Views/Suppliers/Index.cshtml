@@ -28,6 +28,9 @@
                 @Html.DisplayNameFor(model => model.Products)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.PriceUSD)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProductStock)
             </th>
             <th>
@@ -36,9 +39,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Article)
-            </th>
+            
+            
             <th></th>
         </tr>
     </thead>
@@ -61,6 +63,9 @@
                 @Html.DisplayFor(modelItem => item.Products)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.PriceUSD)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ProductStock)
             </td>
             <td>
@@ -69,9 +74,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Article.AutoId)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

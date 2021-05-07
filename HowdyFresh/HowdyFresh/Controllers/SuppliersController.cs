@@ -22,7 +22,7 @@ namespace HowdyFresh.Controllers
         // GET: Suppliers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Supplier.Include(s => s.Article).Include(s => s.IdentityUser);
+            var applicationDbContext = _context.Supplier.Include(s => s.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace HowdyFresh.Controllers
             }
 
             var supplier = await _context.Supplier
-                .Include(s => s.Article)
                 .Include(s => s.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supplier == null)
@@ -49,7 +48,6 @@ namespace HowdyFresh.Controllers
         // GET: Suppliers/Create
         public IActionResult Create()
         {
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -59,7 +57,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Products,ProductId,ProductStock,ContactEmail,PhoneNumber,IdentityUserId,Rating")] Supplier supplier)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Products,PriceUSD,ProductStock,ContactEmail,PhoneNumber,Rating,IdentityUserId")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace HowdyFresh.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", supplier.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", supplier.IdentityUserId);
             return View(supplier);
         }
@@ -85,7 +82,6 @@ namespace HowdyFresh.Controllers
             {
                 return NotFound();
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", supplier.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", supplier.IdentityUserId);
             return View(supplier);
         }
@@ -95,7 +91,7 @@ namespace HowdyFresh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Products,ProductId,ProductStock,ContactEmail,PhoneNumber,IdentityUserId,Rating")] Supplier supplier)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Products,PriceUSD,ProductStock,ContactEmail,PhoneNumber,Rating,IdentityUserId")] Supplier supplier)
         {
             if (id != supplier.Id)
             {
@@ -122,7 +118,6 @@ namespace HowdyFresh.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Rating"] = new SelectList(_context.Article, "AutoId", "AutoId", supplier.Rating);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", supplier.IdentityUserId);
             return View(supplier);
         }
@@ -136,7 +131,6 @@ namespace HowdyFresh.Controllers
             }
 
             var supplier = await _context.Supplier
-                .Include(s => s.Article)
                 .Include(s => s.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supplier == null)

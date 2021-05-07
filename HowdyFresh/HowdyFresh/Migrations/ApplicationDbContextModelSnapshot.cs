@@ -80,6 +80,9 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("ContactEmail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Cuisine")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -98,8 +101,6 @@ namespace HowdyFresh.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("Rating");
 
                     b.ToTable("Restaurant");
                 });
@@ -147,7 +148,7 @@ namespace HowdyFresh.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("PriceUSD")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductStock")
@@ -165,8 +166,6 @@ namespace HowdyFresh.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("Rating");
 
                     b.ToTable("Supplier");
                 });
@@ -200,15 +199,15 @@ namespace HowdyFresh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2f195897-1820-4c61-b25f-ca144bc9cff3",
-                            ConcurrencyStamp = "f816db9e-56c3-4a7e-a85a-3de455a4ef90",
+                            Id = "7b7922e5-e3dd-4a72-9872-d6b1e850d133",
+                            ConcurrencyStamp = "6d4501de-8421-4e56-b05b-5b14041b2c71",
                             Name = "Restaurant",
                             NormalizedName = "RESTAURANT"
                         },
                         new
                         {
-                            Id = "1f534c2a-05c7-4d32-b78e-fc0da28bdfeb",
-                            ConcurrencyStamp = "b9f27e19-b26c-4eb7-98d4-e53c3a1b2b9f",
+                            Id = "b60a3b84-3b04-4bcb-8932-c82299fc80fb",
+                            ConcurrencyStamp = "a91b9165-dc63-4558-8dc8-9143a89fe41c",
                             Name = "Supplier",
                             NormalizedName = "SUPPLIER"
                         });
@@ -388,12 +387,6 @@ namespace HowdyFresh.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("HowdyFresh.Models.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("Rating")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
@@ -401,12 +394,6 @@ namespace HowdyFresh.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("HowdyFresh.Models.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("Rating")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

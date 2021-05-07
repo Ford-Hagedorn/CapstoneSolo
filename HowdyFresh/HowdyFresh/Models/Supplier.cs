@@ -17,18 +17,15 @@ namespace HowdyFresh.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Products { get; set; }
-        public int ProductId { get; set; }
+        public int PriceUSD { get; set; }
         public int ProductStock { get; set; }
         public string ContactEmail { get; set; }
         public string PhoneNumber { get; set; }
+        public int Rating { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
-
-        [ForeignKey("Article")]
-        public int Rating { get; set; }
-        public Article Article { get; set; }
 
     }
 }
