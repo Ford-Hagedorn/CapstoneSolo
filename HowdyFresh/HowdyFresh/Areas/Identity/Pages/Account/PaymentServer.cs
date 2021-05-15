@@ -66,7 +66,7 @@ namespace server.Controllers
 
             // This is a sample test API key. Sign in to see examples pre-filled with your key.
 
-            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            StripeConfiguration.ApiKey = "pk_test_51IrRpKJWi52jsatBdENaLIyqc1t7ER8zM8SFpGlPQHVuqwrcb9aBKWXXtopYGdBo9a3tdCkWOBdYWVjHhJtIre2Y00Ey4fpLob";
 
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
