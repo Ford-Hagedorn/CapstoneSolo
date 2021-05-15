@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HowdyFresh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210507122805_init10")]
-    partial class init10
+    [Migration("20210515173544_init25")]
+    partial class init25
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,25 +104,7 @@ namespace HowdyFresh.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Restaurant");
-                });
-
-            modelBuilder.Entity("HowdyFresh.Models.Roles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Restaurant")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Supplier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
+                    b.ToTable("Restaurants");
                 });
 
             modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
@@ -169,7 +151,7 @@ namespace HowdyFresh.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

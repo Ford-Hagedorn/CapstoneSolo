@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowdyFresh.Data;
 using HowdyFresh.Models;
+using System.Security.Claims;
 
 namespace HowdyFresh.Controllers
 {
@@ -22,7 +23,13 @@ namespace HowdyFresh.Controllers
         // GET: Suppliers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Supplier.Include(s => s.IdentityUser);
+            var userID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var restaurant = _context.Suppliers.Where(x => x.IdentityUserId == userID);
+            if (restaurant == null)
+            {
+                return View("Create");
+            }
+            var applicationDbContext = _context.Suppliers.Include(s => s.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +41,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var supplier = await _context.Supplier
+            var supplier = await _context.Suppliers
                 .Include(s => s.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supplier == null)
@@ -77,7 +84,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var supplier = await _context.Supplier.FindAsync(id);
+            var supplier = await _context.Suppliers.FindAsync(id);
             if (supplier == null)
             {
                 return NotFound();
@@ -130,7 +137,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var supplier = await _context.Supplier
+            var supplier = await _context.Suppliers
                 .Include(s => s.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supplier == null)
@@ -146,15 +153,15 @@ namespace HowdyFresh.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var supplier = await _context.Supplier.FindAsync(id);
-            _context.Supplier.Remove(supplier);
+            var supplier = await _context.Suppliers.FindAsync(id);
+            _context.Suppliers.Remove(supplier);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SupplierExists(int id)
         {
-            return _context.Supplier.Any(e => e.Id == id);
+            return _context.Suppliers.Any(e => e.Id == id);
         }
     }
 }

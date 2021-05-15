@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowdyFresh.Data;
 using HowdyFresh.Models;
+using System.Security.Claims;
 
 namespace HowdyFresh.Controllers
 {
@@ -22,7 +23,13 @@ namespace HowdyFresh.Controllers
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Restaurant.Include(r => r.IdentityUser);
+            var userID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var restaurant = _context.Restaurants.Where(x => x.IdentityUserId == userID);
+            if (restaurant == null)
+            {
+                return View("Create");
+            }
+            var applicationDbContext = _context.Restaurants.Include(r => r.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +41,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant
+            var restaurant = await _context.Restaurants
                 .Include(r => r.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (restaurant == null)
@@ -77,7 +84,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.FindAsync(id);
+            var restaurant = await _context.Restaurants.FindAsync(id);
             if (restaurant == null)
             {
                 return NotFound();
@@ -130,7 +137,7 @@ namespace HowdyFresh.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant
+            var restaurant = await _context.Restaurants
                 .Include(r => r.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (restaurant == null)
@@ -146,15 +153,15 @@ namespace HowdyFresh.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var restaurant = await _context.Restaurant.FindAsync(id);
-            _context.Restaurant.Remove(restaurant);
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            _context.Restaurants.Remove(restaurant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RestaurantExists(int id)
         {
-            return _context.Restaurant.Any(e => e.Id == id);
+            return _context.Restaurants.Any(e => e.Id == id);
         }
     }
 }

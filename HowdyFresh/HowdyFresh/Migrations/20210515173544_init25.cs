@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HowdyFresh.Migrations
 {
-    public partial class init10 : Migration
+    public partial class init25 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,20 +75,6 @@ namespace HowdyFresh.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Restaurant = table.Column<string>(nullable: true),
-                    Supplier = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +184,7 @@ namespace HowdyFresh.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Restaurant",
+                name: "Restaurants",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -215,9 +201,9 @@ namespace HowdyFresh.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Restaurant", x => x.Id);
+                    table.PrimaryKey("PK_Restaurants", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Restaurant_AspNetUsers_IdentityUserId",
+                        name: "FK_Restaurants_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -225,7 +211,7 @@ namespace HowdyFresh.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplier",
+                name: "Suppliers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -244,9 +230,9 @@ namespace HowdyFresh.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supplier", x => x.Id);
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Supplier_AspNetUsers_IdentityUserId",
+                        name: "FK_Suppliers_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -303,13 +289,13 @@ namespace HowdyFresh.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurant_IdentityUserId",
-                table: "Restaurant",
+                name: "IX_Restaurants_IdentityUserId",
+                table: "Restaurants",
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Supplier_IdentityUserId",
-                table: "Supplier",
+                name: "IX_Suppliers_IdentityUserId",
+                table: "Suppliers",
                 column: "IdentityUserId");
         }
 
@@ -337,13 +323,10 @@ namespace HowdyFresh.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Restaurant");
+                name: "Restaurants");
 
             migrationBuilder.DropTable(
-                name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "Supplier");
+                name: "Suppliers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

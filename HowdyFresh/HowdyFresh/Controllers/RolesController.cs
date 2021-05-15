@@ -34,7 +34,7 @@ namespace HowdyFresh.Controllers
             }
 
             var roles = await _context.Roles
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id.ToString());
             if (roles == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace HowdyFresh.Controllers
             }
 
             var roles = await _context.Roles
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id.ToString());
             if (roles == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace HowdyFresh.Controllers
 
         private bool RolesExists(int id)
         {
-            return _context.Roles.Any(e => e.Id == id);
+            return _context.Roles.Any(e => e.Id == id.ToString());
         }
     }
 }

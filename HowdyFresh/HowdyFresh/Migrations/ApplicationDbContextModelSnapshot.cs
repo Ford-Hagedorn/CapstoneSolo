@@ -102,25 +102,7 @@ namespace HowdyFresh.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Restaurant");
-                });
-
-            modelBuilder.Entity("HowdyFresh.Models.Roles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Restaurant")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Supplier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
+                    b.ToTable("Restaurants");
                 });
 
             modelBuilder.Entity("HowdyFresh.Models.Supplier", b =>
@@ -167,7 +149,7 @@ namespace HowdyFresh.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
