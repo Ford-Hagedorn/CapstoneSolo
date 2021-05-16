@@ -44,5 +44,6 @@ namespace HowdyFresh.Data
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Article> Article { get; set; }
         public DbSet<ArticleComment> ArticleComment { get; set; }
+        public DbSet<HowdyFresh.Models.Product> Product { get; set; }
     }
 }

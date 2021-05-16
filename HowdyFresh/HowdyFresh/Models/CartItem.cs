@@ -1,4 +1,5 @@
-﻿using Stripe;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,11 +11,12 @@ namespace HowdyFresh.Models
     public class CartItem
     {
         [Key]
-        public string ItemId { get; set; }
-        public string CartId { get; set; }
-        public int Quantity { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+        public Guid ItemId { get; set; }
+        public int CategoryId { get; set; }
+        public string ItemCode { get; set; }
+        public string ItemName { get; set; }
+        public string Description { get; set; }
+        public decimal ItemPrice { get; set; }
+        public IEnumerable<SelectListItem> SelectListItem { get; set; }
     }
 }

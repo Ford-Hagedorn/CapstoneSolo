@@ -8,10 +8,8 @@ namespace HowdyFresh.Models
 {
     public class Category
     {
-        [ScaffoldColumn(false)]
         public int CategoryID { get; set; }
-
-        [Required, StringLength(100), Display(Name = "Name")]
+        public string CategoryCode { get; set; }
         public string CategoryName { get; set; }
 
         [Display(Name = "Product Description")]

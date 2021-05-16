@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace HowdyFresh.Models
         [Display(Name = "Price")]
         public double? UnitPrice { get; set; }
         public int? CategoryID { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual Category Categories { get; set; }
+        public IEnumerable<SelectListItem> CategorySelectListItem { get; set; }
     }
 }
