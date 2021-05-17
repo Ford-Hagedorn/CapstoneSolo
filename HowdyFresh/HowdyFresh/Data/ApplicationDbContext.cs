@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using HowdyFresh.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HowdyFresh.Data
 {
@@ -22,6 +23,7 @@ namespace HowdyFresh.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<SelectListGroup>().HasNoKey();
             builder.Entity<IdentityRole>()
                 .HasData(
                 new IdentityRole
@@ -44,6 +46,7 @@ namespace HowdyFresh.Data
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Article> Article { get; set; }
         public DbSet<ArticleComment> ArticleComment { get; set; }
-        public DbSet<HowdyFresh.Models.Product> Product { get; set; }
+        public DbSet<HowdyFresh.Models.CartItem> CartItems { get; set; }
+        public DbSet<CategoryClass> Categories { get; set; }
     }
 }

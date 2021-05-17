@@ -3,6 +3,7 @@ using Stripe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace HowdyFresh.Models
         public string ItemName { get; set; }
         public string Description { get; set; }
         public decimal ItemPrice { get; set; }
-        public IEnumerable<SelectListItem> SelectListItem { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem> CategorySelectListItem { get; set; }
     }
 }

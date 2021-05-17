@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HowdyFresh.Models.ShoppingCart>
+@{
+    ViewBag.Title = "Index";
+}
+<h1>Index</h1>
+
+<div class="container">
+    <h2 class="text-center">Products</h2>
+    @foreach (var item in Model)
+            {
+                <div class="col-md-3" style="margin-bottom: 30px">
+                    <div style="text-align: center; border-bottom: 2px solid #4800ff">
+                        <h4>@item.ItemName</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <b>@item.Description</b>
+                    </div>
+                    <div class="col-md-6" style="font-size: 10px; border-top: 2px solid #4800ff">
+                        <b>@item.ItemPrice.ToString("#,##0.00 USD")</b>
+                    </div>
+                    <div class="col-md-3" style="text-align: right; margin-bottom: 10px; border-top: 2px solid #4800ff; padding:2 px">
+                        <input type="button" name="AddToCart" value="Add to Cart" class="btn btn-primary" itemid="@item.ItemId" id="btnAddToCart" onclick="AddToCart(this)"/>
+                    </div>
+
+                </div>
+            }
+</div>
