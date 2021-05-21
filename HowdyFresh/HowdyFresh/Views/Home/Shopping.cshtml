@@ -1,5 +1,13 @@
 ﻿<ul class="nav navbar-nav navbar-right">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Shopping">Cart</a>
+        @if (#cartCounter == null)
+        {
+                @Html.ActionLink("Cart", "ShoppingCart", "Shopping", new {id = "cartItem"})
+        }
+        else
+            {
+                @Html.ActionLink("Cart(" + "#cartCounter" + ")" , "ShoppingCart", "Shopping", new { id = "cartItem" })
+            }
+        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Shopping", new {id = "cartItem"} >Cart</a>
     </li>
 </ul>

@@ -4,6 +4,30 @@
 }
 <h1>Index</h1>
 
+<script type="text/javascript">
+    function AddToCart(item) {
+        var itemId = $(item).attr("itemId");
+        var formData = new FormData();
+        formData.append("ItemId", itemId);
+        $.ajax({
+            async: true,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Shopping/Index',
+            success: function(data) {
+                if (data.Success) {
+                    $("#cartItem").text("Cart (" + data.Counter + ")");
+                }
+            },
+            error function() {
+                alert("Something went wrong.");
+            }
+
+        })
+    }
+</script>
 <div class="container">
     <h2 class="text-center">Products</h2>
     @foreach (var item in Model)
